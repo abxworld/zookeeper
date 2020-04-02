@@ -171,6 +171,7 @@ public class RequestThrottler extends ZooKeeperCriticalThread {
                     if (request.isStale()) {
                         ServerMetrics.getMetrics().STALE_REQUESTS.add(1);
                     }
+                    //fixme 执行提交从客户端读取的数据
                     zks.submitRequestNow(request);
                 }
             }

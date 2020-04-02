@@ -427,7 +427,8 @@ public class ClientCnxn {
         ClientCnxnSocket clientCnxnSocket,
         long sessionId,
         byte[] sessionPasswd,
-        boolean canBeReadOnly) {
+        boolean canBeReadOnly)
+    {
         this.zooKeeper = zooKeeper;
         this.watcher = watcher;
         this.sessionId = sessionId;

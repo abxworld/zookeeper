@@ -228,6 +228,7 @@ public class NIOServerCnxn extends ServerCnxn {
             ByteBuffer[] bufferList = new ByteBuffer[outgoingBuffers.size()];
             // Use gathered write call. This updates the positions of the
             // byte buffers to reflect the bytes that were written out.
+            //fixme 将outgoingBuffers中的数据复制到bufferList
             sock.write(outgoingBuffers.toArray(bufferList));
 
             // Remove the buffers that we have sent
@@ -327,6 +328,7 @@ public class NIOServerCnxn extends ServerCnxn {
                 }
                 if (incomingBuffer.remaining() == 0) {
                     boolean isPayload;
+                    //头数据
                     if (incomingBuffer == lenBuffer) { // start of next request
                         incomingBuffer.flip();
                         isPayload = readLength(k);

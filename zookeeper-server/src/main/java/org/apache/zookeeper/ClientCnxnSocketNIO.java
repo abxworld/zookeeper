@@ -63,6 +63,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
      * @throws InterruptedException
      * @throws IOException
      */
+    //fixme readAble代表从服务端读取数据，然后对该数据执行客户端的操作,比如说执行监听的回调
     void doIO(Queue<Packet> pendingQueue, ClientCnxn cnxn) throws InterruptedException, IOException {
         SocketChannel sock = (SocketChannel) sockKey.channel();
         if (sock == null) {
@@ -166,6 +167,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         // can proceed, but all other packets should wait until
         // SASL authentication completes.
         Iterator<Packet> iter = outgoingQueue.iterator();
+        //fixme 将连接请求提前
         while (iter.hasNext()) {
             Packet p = iter.next();
             if (p.requestHeader == null) {
@@ -349,6 +351,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             }
         }
         if (sendThread.getZkState().isConnected()) {
+            //fixme 如果有要写的数据,则打开写的开关
             if (findSendablePacket(outgoingQueue, sendThread.tunnelAuthInProgress()) != null) {
                 enableWrite();
             }
