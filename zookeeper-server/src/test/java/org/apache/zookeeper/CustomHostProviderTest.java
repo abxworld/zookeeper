@@ -83,4 +83,12 @@ public class CustomHostProviderTest extends ZKTestCase {
         assertTrue(counter.get() == expectedCounter);
     }
 
+    @Test
+    public void testHashCode() {
+        long l1 = System.currentTimeMillis();
+        System.out.println(l1);
+        long l =  l1^ this.hashCode();
+        System.out.println(l);
+    }
+
 }

@@ -411,7 +411,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory {
                 LOG.info("selector thread exitted run method");
             }
         }
-
+        //fixme io多路复用其实本质上也就是一个selector可以监听多个selectionKey，并且做相应的处理
         private void select() {
             try {
                 selector.select();
@@ -460,6 +460,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory {
          * Iterate over the queue of accepted connections that have been
          * assigned to this thread but not yet placed on the selector.
          */
+        //fixme socketChannel 注册到selector上,也就是一个selector上可以绑定多个selectionKey，这样处理来自客户端的读写事件
         private void processAcceptedConnections() {
             SocketChannel accepted;
             while (!stopped && (accepted = acceptedQueue.poll()) != null) {
